@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "19496168947",
+    "project_id": "engage22recommendation",
+    "storage_bucket": "engage22recommendation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19496168947:android:0ed5633df1f01951def686",
+        "android_client_info": {
+          "package_name": "com.example.bookify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19496168947-3rdri8c5ipq1mo2ub1ghhk46ud69qbk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgh9ABFTw9yHZBftMtgclGw145iIS7ufo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19496168947-3rdri8c5ipq1mo2ub1ghhk46ud69qbk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
