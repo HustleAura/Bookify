@@ -66,7 +66,7 @@ The Profile Page displays some starts and has the logout button for signing out 
 <a id="challenges"></a>
 ## 💡 Challenges faced and learnings
 
-- I had zero knowledge on Machine Learning Algorithms. Spent major time on learning basic ML concepts and learning how to implement them until I understood how to 
+- I had zero knowledge on Machine Learning Algorithms. Spent major time on learning basic ML concepts and learning how to implement them until I understood how recommender systems work and how to implement them
 - I had very basic knowledge about flutter before the program. Spent time on learning application architecture and state management through different methods and also small animations to make the UI better
 - I had never implemented any third party services before. Learnt how to use firebase for authentication service
 - I had no idea about dex limits on dependencies and therefore could not use cloud firestore service. This resulted in the app on missing out major features
