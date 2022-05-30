@@ -4,6 +4,12 @@
 
 #### Demo video link : [https://www.youtube.com/watch?v=O2Ul1a1d1lU](https://www.youtube.com/watch?v=hOelPMTypqY)
 
+Test credentials used in demo : 
+Test email: `manjeet@gmail.com`
+
+Test password: `123456`
+
+
 ### 📌 Table of Contents
 * [Features](#features)
 * [Tech Stack Used/ Dependencies](#tech-stack)
@@ -37,31 +43,41 @@
 <a id="usage"></a>
 ## 📖 Usage guide/ Application flow
 
-### Landing Page 
-Continue Signing Up/In by clicking the highlighted buttons.
-
 ### Sign Up Page
 Enter all the fields for successful sign up. Make sure the password strength is strong. It requires a minimum of 6 characters
 
-### Sign In Page
+![WhatsApp Image 2022-05-31 at 12 47 28 AM](https://user-images.githubusercontent.com/80444886/171054591-132c934b-aae1-4100-b09d-d63cddbc3865.jpeg)
+
+
+### Login Page
 You can sign in using the email/password you used to sign yourself up previously.
+
+![WhatsApp Image 2022-05-31 at 12 47 28 AM(1)](https://user-images.githubusercontent.com/80444886/171054616-8530d919-2a87-4a0f-a424-1d3b36ca83c0.jpeg)
 
 After entering your email/password, pressing login and a successfull sign in, you will be directed to the Bookify app.
 
-### Post-SignIn HomePage
+### Post-Login HomePage
 The default homepage appears as follows. It contains recomendations for user based on his/her favorites
+
+![WhatsApp Image 2022-05-31 at 12 47 28 AM(2)](https://user-images.githubusercontent.com/80444886/171054626-851facd2-71b2-4c8b-b06c-a88cb0fe896c.jpeg)
 
 ### Favorites Page
 
 The following is the favorites page which shows list of books added to favorites
 
+![WhatsApp Image 2022-05-31 at 12 47 28 AM(3)](https://user-images.githubusercontent.com/80444886/171054641-de56f309-1e62-4eea-a651-04b0c1e789c7.jpeg)
+
 ### Explore Page
 
 Search results for any search query is displayed here. The results are displayed even if there is small error in search query.
 
+![WhatsApp Image 2022-05-31 at 12 48 43 AM](https://user-images.githubusercontent.com/80444886/171054653-18e0e940-9283-48da-956a-977f945778fe.jpeg)
+
 ### Profile Page
 
 The Profile Page displays some starts and has the logout button for signing out of the page.
+
+![WhatsApp Image 2022-05-31 at 12 47 28 AM(4)](https://user-images.githubusercontent.com/80444886/171054670-bee2a285-5864-4213-b619-dd908082dd20.jpeg)
 
 <a id="challenges"></a>
 ## 💡 Challenges faced and learnings
