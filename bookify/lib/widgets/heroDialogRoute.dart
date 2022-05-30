@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+// class for pop up animation in book interface
 class HeroDialogRoute extends PageRoute {
-  WidgetBuilder _builder;
+  final WidgetBuilder _builder;
   HeroDialogRoute(this._builder);
 
   @override

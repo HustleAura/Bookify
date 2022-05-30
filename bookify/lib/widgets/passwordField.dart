@@ -2,6 +2,7 @@ import 'package:bookify/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'textFieldContainer.dart';
 
+// password text field using the text field container
 class PasswordField extends StatelessWidget {
   final TextEditingController _passwordController;
   const PasswordField(
@@ -15,7 +16,7 @@ class PasswordField extends StatelessWidget {
         obscureText: true,
         controller: _passwordController,
         cursorColor: primaryColor,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Password",
           icon: Icon(
             Icons.lock,

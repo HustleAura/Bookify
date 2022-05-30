@@ -1,9 +1,9 @@
 import 'package:bookify/utils/functions.dart';
 import 'package:bookify/widgets/bookTile.dart';
+import 'package:bookify/utils/models/bookModel.dart';
 import 'package:bookify/widgets/textFieldContainer.dart';
-import 'package:flutter/material.dart';
 
-import '../../utils/models/bookModel.dart';
+import 'package:flutter/material.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({Key? key}) : super(key: key);
@@ -25,7 +25,9 @@ class _LibraryPageState extends State<LibraryPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // text field with caption
           Expanded(
+            flex: 1,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Center(
@@ -47,8 +49,9 @@ class _LibraryPageState extends State<LibraryPage> {
                 ),
               ),
             ),
-            flex: 1,
           ),
+
+          // list of search results as fetched by the api
           Expanded(
             flex: 5,
             child: GridView.builder(

@@ -1,19 +1,19 @@
 import 'package:bookify/utils/models/userModel.dart';
+import 'package:bookify/utils/constants.dart';
+import 'package:bookify/widgets/inputField.dart';
+import 'package:bookify/widgets/passwordField.dart';
+import 'package:bookify/widgets/roundedButton.dart';
 import 'package:bookify/utils/services/authenticationService.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/constants.dart';
-import '../widgets/inputField.dart';
-import '../widgets/passwordField.dart';
-import '../widgets/roundedButton.dart';
-
 class AuthPage extends StatefulWidget {
-  bool _isLogin;
-  AuthPage(this._isLogin);
+  // this tells whether to render the login or signup page since both are in one widget
+  final bool _isLogin;
+  const AuthPage(this._isLogin);
 
   @override
   State<AuthPage> createState() => _AuthPageState(_isLogin);
@@ -36,6 +36,7 @@ class _AuthPageState extends State<AuthPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // welcome caption
             Padding(
               padding:
                   EdgeInsets.fromLTRB(_height * 0.05, 0, _height * 0.05, 0),
@@ -56,17 +57,23 @@ class _AuthPageState extends State<AuthPage> {
                       ),
                     ],
                   ),
-                  Container(
+
+                  // lottie animation from assets
+                  SizedBox(
                     child: Lottie.asset(
                       (_isLogin) ? loginLottie : signUpLottie,
                     ),
                     height: _height * 0.5,
                     width: _width,
                   ),
+
+                  // credential input fields
                   InputField('email', Icons.add, _emailController),
                   PasswordField(
                     _passwordController,
                   ),
+
+                  // Button for login / signup
                   RoundedButton(
                     (_isLogin) ? 'LOGIN' : 'SIGNUP',
                     () {
@@ -91,6 +98,8 @@ class _AuthPageState extends State<AuthPage> {
                             );
                     },
                   ),
+
+                  // option to alter login and signup. This inverts _islogin property
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -98,25 +107,23 @@ class _AuthPageState extends State<AuthPage> {
                         (_isLogin)
                             ? 'Don\'t have an account?'
                             : 'Already have an account?',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: primaryColor,
                         ),
                       ),
-                      Container(
-                        child: InkWell(
-                          child: Text(
-                            (_isLogin) ? ' Sign Up ' : ' Log in ',
-                            style: TextStyle(
-                              color: primaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      InkWell(
+                        child: Text(
+                          (_isLogin) ? ' Sign Up ' : ' Log in ',
+                          style: const TextStyle(
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
                           ),
-                          onTap: () {
-                            setState(() {
-                              _isLogin = !_isLogin;
-                            });
-                          },
                         ),
+                        onTap: () {
+                          setState(() {
+                            _isLogin = !_isLogin;
+                          });
+                        },
                       )
                     ],
                   ),

@@ -18,6 +18,7 @@ dependencies:
   firebase_auth: ^3.3.18
   provider: ^6.0.2
   dio: ^4.0.6
+  cloud_firestore: ^3.1.17
 
 dev_dependencies:
   flutter_test:

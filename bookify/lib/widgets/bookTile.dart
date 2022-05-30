@@ -1,20 +1,21 @@
-import 'package:bookify/utils/models/bookModel.dart';
 import 'package:bookify/utils/constants.dart';
 import 'package:bookify/widgets/bookInterface.dart';
+import 'package:bookify/utils/models/bookModel.dart';
 import 'package:bookify/widgets/heroDialogRoute.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class BookTile extends StatefulWidget {
-  Book _book;
-  BookTile(this._book);
+  final Book _book;
+  const BookTile(this._book);
 
   @override
   State<BookTile> createState() => _BookTileState(_book);
 }
 
+// Book tile for showing books in recommendations
 class _BookTileState extends State<BookTile> {
-  Book _book;
+  final Book _book;
   _BookTileState(this._book);
 
   @override

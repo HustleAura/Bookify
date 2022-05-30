@@ -1,11 +1,12 @@
-import 'package:bookify/routes/screens/favoritePage.dart';
+import 'package:bookify/utils/functions.dart';
 import 'package:bookify/routes/screens/homePage.dart';
 import 'package:bookify/routes/screens/libraryPage.dart';
 import 'package:bookify/routes/screens/profilePage.dart';
-import 'package:bookify/utils/constants.dart';
-import 'package:bookify/utils/functions.dart';
+import 'package:bookify/routes/screens/favoritePage.dart';
+
 import 'package:flutter/material.dart';
 
+// this is the common page for all pages and bottom navigation bar
 class LandPage extends StatefulWidget {
   const LandPage({Key? key}) : super(key: key);
 
@@ -14,7 +15,7 @@ class LandPage extends StatefulWidget {
 }
 
 class _LandPageState extends State<LandPage> {
-  PageController _pageController = PageController();
+  final _pageController = PageController();
 
   int _currentIndex = 0;
   void _updatePage(int index) {
@@ -43,7 +44,7 @@ class _LandPageState extends State<LandPage> {
       body: PageView(
         onPageChanged: _updatePage,
         controller: _pageController,
-        children: [
+        children: const [
           HomePage(),
           FavoritePage(),
           LibraryPage(),

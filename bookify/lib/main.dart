@@ -17,8 +17,20 @@ class Bookify extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableProvider<AuthenticationService>(
-      create: (_) => AuthenticationService(FirebaseAuth.instance),
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (BuildContext context) {
+            return AuthenticationService(FirebaseAuth.instance);
+          },
+        ),
+        StreamProvider(
+          create: (context) {
+            return context.read<AuthenticationService>().authStateChanges;
+          },
+          initialData: null,
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

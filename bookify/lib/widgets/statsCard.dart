@@ -1,18 +1,20 @@
 import 'package:bookify/utils/constants.dart';
+
 import 'package:flutter/material.dart';
 
+// stats card for displaying dataset statistics in the profile page UI
 class StatsCard extends StatefulWidget {
-  int _count;
-  String _caption;
-  StatsCard(this._count, this._caption);
+  final int _count;
+  final String _caption;
+  const StatsCard(this._count, this._caption);
 
   @override
   State<StatsCard> createState() => _StatsCardState(_count, _caption);
 }
 
 class _StatsCardState extends State<StatsCard> {
-  int _count;
-  String _caption;
+  final int _count;
+  final String _caption;
   _StatsCardState(this._count, this._caption);
 
   @override
@@ -23,11 +25,11 @@ class _StatsCardState extends State<StatsCard> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 45,
       ),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.38,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

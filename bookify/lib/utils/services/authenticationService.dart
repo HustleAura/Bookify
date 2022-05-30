@@ -1,8 +1,8 @@
 import 'package:bookify/utils/models/userModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
-class AuthenticationService with ChangeNotifier {
+class AuthenticationService {
   FirebaseAuth _firebaseAuth;
   AuthenticationService(this._firebaseAuth);
 
@@ -25,6 +25,12 @@ class AuthenticationService with ChangeNotifier {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: user.email, password: user.password);
+      FirebaseFirestore.instance.collection('users').doc(user.email).set(
+        {
+          'email': user.email,
+          'favorites': [],
+        },
+      );
     } on FirebaseAuthException catch (e) {
       print(e.message);
     }

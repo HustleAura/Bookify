@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:bookify/utils/constants.dart';
 import 'package:bookify/utils/functions.dart';
-import 'package:flutter/material.dart';
 
 class Book {
   String bookName;
   late FutureBuilder bookCover;
 
   Book(this.bookName) {
+    // the book cover image can be then fetched from the api if name is known
     bookCover = FutureBuilder(
       future: apiCall(
         apiLink: imageUrlApi,

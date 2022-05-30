@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import '../utils/constants.dart';
+import 'package:bookify/utils/constants.dart';
 import 'textFieldContainer.dart';
 
+import 'package:flutter/material.dart';
+
+// input text field using text field container
 class InputField extends StatelessWidget {
   final String hintText;
   final IconData icon;

@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:bookify/utils/constants.dart';
-import 'package:bookify/widgets/bookTile.dart';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
-import 'models/bookModel.dart';
-
+// function for building the UI of the bottom navigation bar
 List<BottomNavigationBarItem> buildNavBarList(List<IconData> itemList) {
   List<BottomNavigationBarItem> navBarItemList = [];
   itemList.forEach(
@@ -30,6 +26,7 @@ List<BottomNavigationBarItem> buildNavBarList(List<IconData> itemList) {
   return navBarItemList;
 }
 
+// general function to call the api and fetch data
 Future<dynamic> apiCall({apiLink, bookTitle, header}) async {
   final dio = Dio();
 
@@ -43,6 +40,9 @@ Future<dynamic> apiCall({apiLink, bookTitle, header}) async {
   return await jsonResponse.data[header];
 }
 
+// specific function to convert api response to usable formats
+
+// image cover
 String apiCallToImageUrl(String responseData) {
   var imageUrl = '';
   int start = 0;
@@ -59,6 +59,7 @@ String apiCallToImageUrl(String responseData) {
   return imageUrl;
 }
 
+// search recommendation list
 Future<List<dynamic>> searchRecommendationList(searchTitle) async {
   return await apiCall(
     apiLink: searchRecommendationApi,
@@ -67,6 +68,7 @@ Future<List<dynamic>> searchRecommendationList(searchTitle) async {
   );
 }
 
+// user recommendation list
 Future<List<dynamic>> userRecommendationList(favoriteTitle) async {
   return await apiCall(
     apiLink: userRecommendationApi,

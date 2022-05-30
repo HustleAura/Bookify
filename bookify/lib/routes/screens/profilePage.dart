@@ -1,17 +1,17 @@
 import 'package:bookify/utils/constants.dart';
 import 'package:bookify/widgets/statsCard.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:bookify/utils/services/authenticationService.dart';
 
-import '../../utils/services/authenticationService.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PageButton extends StatelessWidget {
-  String _caption;
-  Color _color, _fontColor;
-  VoidCallback _onPressed;
-  PageButton(this._caption, this._color, this._fontColor, this._onPressed);
+  final String _caption;
+  final Color _color, _fontColor;
+  final VoidCallback _onPressed;
+  const PageButton(
+      this._caption, this._color, this._fontColor, this._onPressed);
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +60,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
 
+    // Upper section of the UI with the quote
     return Column(
       children: [
         Expanded(
@@ -83,8 +83,8 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
                   child: Text(
                     'A reader lives a thousand lives before he dies '
                     '. . . The man who never reads lives only one.',
@@ -95,14 +95,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+                  children: const [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      padding: EdgeInsets.symmetric(horizontal: 30),
                       child: Text(
                         ' - George R.R. Martin',
                         style: TextStyle(
@@ -119,6 +119,8 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
+
+        // Row of two stats card displaying dataset statistics
         Expanded(
           flex: 3,
           child: Container(
@@ -131,6 +133,8 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
+
+        // two buttons one for logout and the other to fill the UI
         Expanded(
           flex: 1,
           child: PageButton(
@@ -154,6 +158,8 @@ class _ProfilePageState extends State<ProfilePage> {
             },
           ),
         ),
+
+        // Footer of the page
         Expanded(
           flex: 1,
           child: Column(

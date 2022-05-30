@@ -1,28 +1,25 @@
 import 'package:bookify/utils/constants.dart';
 import 'package:bookify/utils/functions.dart';
-import 'package:bookify/utils/models/bookModel.dart';
-import 'package:bookify/widgets/bookTile.dart';
 import 'package:bookify/widgets/likeButton.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class BookInterface extends StatefulWidget {
-  String _bookTitle;
-  BookInterface(this._bookTitle);
+  final String _bookTitle;
+  const BookInterface(this._bookTitle);
 
   @override
   State<BookInterface> createState() => _BookInterfaceState(_bookTitle);
 }
 
+// interface to view book details and adding to favorites
 class _BookInterfaceState extends State<BookInterface> {
-  String _bookTitle;
+  final String _bookTitle;
   _BookInterfaceState(this._bookTitle);
 
   @override
   Widget build(BuildContext context) {
-    final _height = MediaQuery.of(context).size.height;
-    final _width = MediaQuery.of(context).size.width;
-
     return Hero(
       tag: _bookTitle,
       child: Center(
@@ -31,6 +28,7 @@ class _BookInterfaceState extends State<BookInterface> {
             color: transparentColor,
             child: Column(
               children: [
+                // book cover with animation
                 FutureBuilder(
                   future: apiCall(
                     apiLink: imageUrlApi,
@@ -52,13 +50,15 @@ class _BookInterfaceState extends State<BookInterface> {
                     }
                   },
                 ),
+
+                // rating bar and like button
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       RatingBar.builder(
-                        itemBuilder: (context, _) => Icon(
+                        itemBuilder: (context, _) => const Icon(
                           Icons.star,
                           color: ratingColor,
                         ),

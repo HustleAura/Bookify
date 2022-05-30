@@ -1,26 +1,26 @@
+// local imports and libraries
 import 'package:bookify/utils/constants.dart';
 import 'package:bookify/utils/functions.dart';
 import 'package:bookify/widgets/bookTile.dart';
+import 'package:bookify/utils/models/bookModel.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../utils/models/bookModel.dart';
-import 'favoritePage.dart';
-
-int bookCount = 0;
-Future<List<dynamic>> bookList = Future<List<dynamic>>.value([]);
-
+// each button in the genre UI
 class GenreButton extends StatelessWidget {
-  String _caption;
-  Color _color;
-  GenreButton(this._caption, this._color);
+  final String _caption;
+  final Color _color;
+  const GenreButton(this._caption, this._color);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.47,
       height: MediaQuery.of(context).size.height * 0.15,
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: ElevatedButton(
         onPressed: () {
           // getSearchRecommendation('da vinci code');
@@ -40,9 +40,10 @@ class GenreButton extends StatelessWidget {
   }
 }
 
+// set of two buttons combined to use together
 class ButtonRow extends StatelessWidget {
-  String _caption1, _caption2;
-  ButtonRow(this._caption1, this._caption2);
+  final String _caption1, _caption2;
+  const ButtonRow(this._caption1, this._caption2);
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +62,7 @@ class ButtonRow extends StatelessWidget {
   }
 }
 
+// Home Page Widget to be displayed on the screen
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -71,8 +73,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    // reference to the user document in the firebase collection
+    final userDocStream = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .snapshots();
+
     return Column(
       children: [
+        // uppersection of recommended books
         Expanded(
           flex: 2,
           child: Column(
@@ -81,33 +90,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
-                child: Row(
-                  children: [
-                    Text(
-                      'Based on what you like :',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: fontColor,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          var favoriteTitle =
-                              'Harry Potter and the half blood prince';
-                          if (favoriteList.isNotEmpty) {
-                            favoriteTitle = favoriteList.last;
-                          }
-
-                          bookList = userRecommendationList(favoriteTitle);
-                          bookCount = 6;
-                        });
-                      },
-                      icon: Icon(Icons.refresh),
-                    ),
-                  ],
+                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                child: Text(
+                  'Based on what you like :',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: fontColor,
+                  ),
                 ),
               ),
             ],
@@ -117,33 +107,55 @@ class _HomePageState extends State<HomePage> {
           flex: 3,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-            child: ListView.builder(
-              itemCount: bookCount,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return FutureBuilder(
-                  future: bookList,
-                  builder:
-                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return const Text(
-                        'Umm I guess something went wrong. Restarting the app might work?',
-                      );
-                    } else {
-                      return BookTile(
-                        Book(
-                          snapshot.data[index].toString(),
-                        ),
-                      );
-                    }
-                  },
-                );
-              },
-            ),
+            child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                stream: userDocStream,
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> mapSnapshot) {
+                  final favoriteList = mapSnapshot.data.data()['favorites'];
+                  if (favoriteList.isEmpty) {
+                    return const Text(
+                      'Hey ! You seem to be new here. Have a look at the explore page',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 30,
+                      ),
+                    );
+                  } else {
+                    final bookList = userRecommendationList(favoriteList.last);
+
+                    return FutureBuilder(
+                      future: bookList,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> listSnapshot) {
+                        if (listSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (listSnapshot.hasError) {
+                          return const Text(
+                            'Umm I guess something went wrong. Restarting the app might work?',
+                          );
+                        } else {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: listSnapshot.data.length,
+                            itemBuilder: ((context, index) {
+                              return BookTile(
+                                Book(
+                                  listSnapshot.data[index],
+                                ),
+                              );
+                            }),
+                          );
+                        }
+                      },
+                    );
+                  }
+                }),
           ),
         ),
+
+        // lower section of genre UI
         Expanded(
           flex: 1,
           child: Column(
@@ -152,7 +164,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Text(
                   'Our most loved genres :',
                   style: TextStyle(
@@ -168,7 +180,7 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           flex: 4,
           child: ListView(
-            children: [
+            children: const [
               ButtonRow('SCI-FI', 'ACTION'),
               ButtonRow('COMEDY', 'DRAMA'),
               ButtonRow('THRILLER', 'ROMANCE'),
