@@ -43,6 +43,12 @@ Test password: `123456`
 <a id="usage"></a>
 ## 📖 Usage guide/ Application flow
 
+### Installation : 
+
+- Clone the repo on to the local machine.
+- Open Bookify/bookify in android studio.
+- Run main.dart in emulator / device.
+
 ### Sign Up Page
 Enter all the fields for successful sign up. Make sure the password strength is strong. It requires a minimum of 6 characters
 
@@ -75,7 +81,7 @@ Search results for any search query is displayed here. The results are displayed
 
 ### Profile Page
 
-The Profile Page displays some starts and has the logout button for signing out of the page.
+The Profile Page displays some statistics and has the logout button for signing out of the page.
 
 ![WhatsApp Image 2022-05-31 at 12 47 28 AM(4)](https://user-images.githubusercontent.com/80444886/171054670-bee2a285-5864-4213-b619-dd908082dd20.jpeg)
 
